@@ -1,10 +1,21 @@
-int DEBUG = 1;
-int solenoidPin = 4;
+/**
+ * SolenoidTest.ino
+ * Run this code to test the setup of the solenoid valve.
+ * Author: eindiran <eindiran@uchicago.edu>
+ */
 
+/**
+ * One-time setup steps; open serial port, prep solenoid's pin.
+ */
 void setup() {
   Serial.begin(9600);
-  pinMode(solenoidPin, OUTPUT);
+  pinMode(SOLENOID_PIN, OUTPUT);
 }
+
+// Initialize globals
+int DEBUG = 1;
+int DELAY_SECONDS = 1;
+int SOLENOID_PIN = 4;
 
 /**
  * Open a NC Solenoid valve:
@@ -17,15 +28,18 @@ void nc_turn_solenoid(int num_seconds) {
     // Poor-man's printf
     Serial.print("Opening solenoid valve for "); Serial.print(num_seconds); Serial.println(".");
   }
-  digitalWrite(solenoidPin, HIGH); // Switched magnet on; open
+  digitalWrite(SOLENOID_PIN, HIGH); // Switched magnet on; open
   delay(num_ms);
-  digitalWrite(solenoidPin, LOW); // Switched magnet off; closed
+  digitalWrite(SOLENOID_PIN, LOW); // Switched magnet off; closed
   if (DEBUG) {
     Serial.println("Solenoid valve closed.");
   }
 }
 
+/**
+ * Main loop.
+ */
 void loop() {
-  nc_turn_solenoid(1); // turn on for 1s
-  delay(1000);
+  nc_turn_solenoid(DELAY_SECONDS); // turn on for 1s
+  delay(DELAY_SECONDS * 1000);
 }

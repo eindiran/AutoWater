@@ -1,4 +1,5 @@
 /**
+ * AutoWater.ino
  * Automate watering a plant using a solenoid valve
  * and a moisture sensor.
  * Author: eindiran <eindiran@uchicago.edu>
