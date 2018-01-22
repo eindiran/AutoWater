@@ -22,4 +22,6 @@ Place the moisture sensor carefully in the potted plant, leaving the wire sectio
 
 Take three jumper wires (1 red, 1 black, 1 blue). Match them to the same colors coming off of the sensor. Run the red wire into the __5v__ pin on the Arduino: this will provide power to the sensor. Next run the blue wire to the __Analog 0__ pin, and the black wire to the ground pin (labeled __GND__).
 
-Power up the Arduino and upload __MoistureSensorTest.ino__ to it. Open up the Arduino IDE and from the tools menu select "__Serial Monitor__". If everything has been set up correctly, the window which opens will display a reading from the sensor which is updated every few seconds.
+Power up the Arduino and upload __MoistureSensorTest.ino__ to it. Open up the Arduino IDE and from the tools menu select __Serial Monitor__. If everything has been set up correctly, the window which opens will display a reading from the sensor which is updated every few seconds. If the monitor displays nonsensical symbols instead of human-readable text, make sure that the baud rate for the monitor matches what is set in the code: using the vanilla code, set to __9600__ Bd.
+
+In order to be sure that the sensor is working proper, after you have begun to see readings from it, slowly add water to the plant. Pour carefully, taking care to not splash the sensor directly. Gradually the reading from the sensor should *decrease* in value.
