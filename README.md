@@ -73,6 +73,7 @@ Unplug the Arduino. Take a short length of __aquarium tubing__ and cut it off, p
 Plug the Arduino back in and run SolenoidTest.ino again. The valve should alternate between opening for a second and closing for a second, letting water out into the bucket each time it is open.
 
 ## Putting it all together
+![AutoWater diagram](https://github.com/eindiran/AutoWater/blob/master/diagrams/AutoWaterDiagram.png)
 If you didn't unplug the moisture sensor during the last step, congratulations! You are almost ready to run AutoWater. If you did, follow the instructions for plugging in the moisture sensor while leaving all the wires from setting up the solenoid valve plugged in.
 
 The last step before you run everything is connecting the potted plant. First place the moisture sensor in the soil, then take the output side of the tubing amd place it so that the output water will end up watering the plant, but not directly on the moisture sensor.
