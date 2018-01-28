@@ -8,7 +8,7 @@
 int DEBUG = 1;
 int OPEN_SECONDS = 1;
 int DELAY_SECONDS = 1;
-int SOLENOID_PIN = 4;
+int SOLENOID_PIN = 7;
 
 /**
  * One-time setup steps; open serial port, prep solenoid's pin.
