@@ -6,14 +6,14 @@
  */
 
 // Initialize globals.
-int DEBUG = 0;
-int DELAY_SECONDS = 15; // time between moisture checks
+int DEBUG = 1;
+int DELAY_SECONDS = 5; // time between moisture checks
 int AIR_VALUE = 1000; // Replace this value with sensor reading of air
 int WATER_VALUE = 200; // Replace this value with sensor reading of water
 int INTERVAL = 200; // Replace this with (AIR_VALUE - WATER_VALUE)/4
 int DRYNESS_THRESHOLD = 425;
 int SOLENOID_PIN = 4;
-int WATER_TIME = 4; // time to open SV in seconds
+int WATER_TIME_MS = 450; // time to open SV in ms
 
 /**
  * One-time setup.
@@ -70,7 +70,7 @@ void water_plant(int moisture_val) {
     if (DEBUG) {
       Serial.println("Moisture beneath threshold: watering plant.");
     }
-    nc_turn_solenoid(WATER_TIME);
+    nc_turn_solenoid(WATER_TIME_MS);
   } else if (DEBUG) {
     Serial.println("Moisture level above threshold: not watering plant.");
   }
@@ -89,19 +89,17 @@ void print_sensor_value(int val) {
 void loop() {
   int moisture_val; // reading from moisture sensor
   moisture_val = analogRead(0); // connect sensor to Analog 0
+  print_sensor_value(moisture_val);
   if (DEBUG) {
-    print_sensor_value(moisture_val);
-    if (DEBUG > 1) {
-      // if DEBUG > 1 print human-readable moisture level
-      String moisture_level;
-      get_moisture_level(moisture_val, moisture_level);
-      Serial.println(moisture_level);
-    }
-    if (DEBUG > 2) {
-      // if DEBUG > 2, check sensor w/o watering
-      delay(DELAY_SECONDS * 1000);
-      return;
-    }
+    // if DEBUG != 0 print human-readable moisture level
+    String moisture_level;
+    get_moisture_level(moisture_val, moisture_level);
+    Serial.println(moisture_level);
+  }
+  if (DEBUG == 2) {
+    // if DEBUG == 2, check sensor w/o watering
+    delay(DELAY_SECONDS * 1000);
+    return;
   }
   water_plant(moisture_val);
   delay(DELAY_SECONDS * 1000);
