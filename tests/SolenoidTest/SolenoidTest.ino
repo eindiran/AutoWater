@@ -4,6 +4,12 @@
  * Author: eindiran <eindiran@uchicago.edu>
  */
 
+// Initialize globals
+int DEBUG = 1;
+int OPEN_SECONDS = 1;
+int DELAY_SECONDS = 1;
+int SOLENOID_PIN = 4;
+
 /**
  * One-time setup steps; open serial port, prep solenoid's pin.
  */
@@ -11,11 +17,6 @@ void setup() {
   Serial.begin(9600);
   pinMode(SOLENOID_PIN, OUTPUT);
 }
-
-// Initialize globals
-int DEBUG = 1;
-int DELAY_SECONDS = 1;
-int SOLENOID_PIN = 4;
 
 /**
  * Open a NC Solenoid valve:
@@ -26,7 +27,7 @@ void nc_turn_solenoid(int num_seconds) {
   int num_ms = num_seconds * 1000;
   if (DEBUG) {
     // Poor-man's printf
-    Serial.print("Opening solenoid valve for "); Serial.print(num_seconds); Serial.println(".");
+    Serial.print("Opening solenoid valve for "); Serial.print(num_seconds); Serial.println(" second(s).");
   }
   digitalWrite(SOLENOID_PIN, HIGH); // Switched magnet on; open
   delay(num_ms);
@@ -37,9 +38,10 @@ void nc_turn_solenoid(int num_seconds) {
 }
 
 /**
- * Main loop.
+ * Main loop: opens the solenoid for OPEN_SECONDS
+ * then waits for DELAY_SECONDS, ad infinitum.
  */
 void loop() {
-  nc_turn_solenoid(DELAY_SECONDS); // turn on for 1s
+  nc_turn_solenoid(OPEN_SECONDS); // turn on for OPEN_SECONDS
   delay(DELAY_SECONDS * 1000);
 }

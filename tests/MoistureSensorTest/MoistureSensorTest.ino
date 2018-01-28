@@ -4,20 +4,19 @@
  * Author: eindiran <eindiran@uchicago.edu>
  */
 
-
-/**
- * Perform one time setup, opening serial port.
- */
-void setup() {
-  Serial.begin(9600); // set the baud rate to 9600
-}
-
 // Initialize globals.
 int DELAY_SECONDS = 1; // time between each read of the sensor in seconds
 int AIR_VALUE = 1000; // Replace this value with sensor reading of air
 int WATER_VALUE = 200; // Replace this value with sensor reading of water
 int INTERVAL = 200; // Replace this with (AIR_VALUE - WATER_VALUE)/4
 int DEBUG = 0; // Set this to 1 to call get_moisture_level()
+
+/**
+ * One time setup; opens serial port.
+ */
+void setup() {
+  Serial.begin(9600); // set the baud rate to 9600
+}
 
 /**
  * Sets a string encoding moisture level.
