@@ -12,7 +12,7 @@ int AIR_VALUE = 1000; // Replace this value with sensor reading of air
 int WATER_VALUE = 200; // Replace this value with sensor reading of water
 int INTERVAL = 200; // Replace this with (AIR_VALUE - WATER_VALUE)/4
 int DRYNESS_THRESHOLD = 425;
-int SOLENOID_PIN = 4;
+int SOLENOID_PIN = 7;
 int WATER_TIME_MS = 450; // time to open SV in ms
 
 /**
