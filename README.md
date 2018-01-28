@@ -62,3 +62,10 @@ Take the __TIP-120 transistor__ and find the front. With the transistor facing y
 
 ### Setting up the ground
 In the column of the __right pin__ of the transistor, add a black wire. Run this wire into the __ground rail__ at the top of the breadboard. Take another black wire and run it from one of two __GND__ pins on the Arduino to the ground rail on the breadboard. The circuit is now complete!
+
+### Running the tests
+Open up the IDE and connect the Arduino to your computer. Upload the file __SolenoidTest.ino__. Pick up the solenoid valve and put it next to your ear. You should hear it turn once per second.
+
+Unplug the Arduino. Take a short length of __aquarium tubing__ and cut it off, placing one end inside the solenoid valve and the other end inside the __water reservoir__ or __pump__. Cut off a second length of tubing and put it into the other side of the solenoid valve. For the test, place this other end inside a bucket.
+
+Plug the Arduino back in and run SolenoidTest.ino again. The valve should alternate between opening for a second and closing for a second, letting water out into the bucket each time it is open.
