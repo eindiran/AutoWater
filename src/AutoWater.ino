@@ -6,8 +6,11 @@
  */
 
 // Initialize globals.
-int DEBUG = 1;
+int DEBUG = 0;
 int DELAY_SECONDS = 15; // time between moisture checks
+int AIR_VALUE = 1000; // Replace this value with sensor reading of air
+int WATER_VALUE = 200; // Replace this value with sensor reading of water
+int INTERVAL = 200; // Replace this with (AIR_VALUE - WATER_VALUE)/4
 int DRYNESS_THRESHOLD = 425;
 int SOLENOID_PIN = 4;
 int WATER_TIME = 4; // time to open SV in seconds
@@ -18,6 +21,27 @@ int WATER_TIME = 4; // time to open SV in seconds
 void setup() {
   Serial.begin(9600); // set the baud rate
   pinMode(SOLENOID_PIN, OUTPUT); // Prep the SV's pin.
+}
+
+/**
+ * Sets a string encoding moisture level.
+ * This function was inspired by the test code here:
+ * https://www.dfrobot.com/wiki/index.php/Capacitive_Soil_Moisture_Sensor_SKU:SEN0193
+ */
+void get_moisture_level(int moisture_val, String &moisture_level) {
+  if (moisture_val <= WATER_VALUE) {
+    moisture_level = "Humidity: 100%";
+  } else if (moisture_val <= (WATER_VALUE + INTERVAL)) {
+    moisture_level = "Humidity: >75%";
+  } else if (moisture_val <= (WATER_VALUE + 2*INTERVAL)) {
+    moisture_level = "Humidity: >50%";
+  } else if (moisture_val <= (WATER_VALUE + 3*INTERVAL)) {
+    moisture_level = "Humidity: >25%";
+  } else if (moisture_val <= (AIR_VALUE)) {
+    moisture_level = "Humidity: >0%";
+  } else {
+    moisture_level = "Humidity: 0%";
+  }
 }
 
 /**
@@ -68,7 +92,13 @@ void loop() {
   if (DEBUG) {
     print_sensor_value(moisture_val);
     if (DEBUG > 1) {
-      // if DEBUG > 1, check sensor w/o watering
+      // if DEBUG > 1 print human-readable moisture level
+      String moisture_level;
+      get_moisture_level(moisture_val, moisture_level);
+      Serial.println(moisture_level);
+    }
+    if (DEBUG > 2) {
+      // if DEBUG > 2, check sensor w/o watering
       delay(DELAY_SECONDS * 1000);
       return;
     }
