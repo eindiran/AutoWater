@@ -6,7 +6,7 @@
  */
 
 // Initialize globals.
-int DEBUG = 2;
+int DEBUG = 1;
 int DELAY_SECONDS = 5; // time between moisture checks
 int AIR_VALUE = 1000; // Replace this value with sensor reading of air
 int WATER_VALUE = 200; // Replace this value with sensor reading of water
