@@ -49,6 +49,8 @@ Save the code and re-upload it to the Arduino. Re-run the test in the air, water
 Here is a diagram showing the setup of the solenoid valve.
 ![Solenoid Valve setup](https://github.com/eindiran/AutoWater/blob/master/diagrams/SolenoidValveDiagram.png)
 
+The setup in this section is based on a tutorial from __BC Robotics__, which can be found [here](https://www.bc-robotics.com/tutorials/controlling-a-solenoid-valve-with-arduino/).
+
 Note that none of the pins used here overlap with those used during the moisture sensor test. As a result, you don't need to unplug anything from the previous step.
 
 ### Setting up the power to the solenoid valve
@@ -69,3 +71,12 @@ Open up the IDE and connect the Arduino to your computer. Upload the file __Sole
 Unplug the Arduino. Take a short length of __aquarium tubing__ and cut it off, placing one end inside the solenoid valve and the other end inside the __water reservoir__ or __pump__. Cut off a second length of tubing and put it into the other side of the solenoid valve. For the test, place this other end inside a bucket.
 
 Plug the Arduino back in and run SolenoidTest.ino again. The valve should alternate between opening for a second and closing for a second, letting water out into the bucket each time it is open.
+
+## Putting it all together
+If you didn't unplug the moisture sensor during the last step, congratulations! You are almost ready to run AutoWater. If you did, follow the instructions for plugging in the moisture sensor while leaving all the wires from setting up the solenoid valve plugged in.
+
+The last step before you run everything is connecting the potted plant. First place the moisture sensor in the soil, then take the output side of the tubing amd place it so that the output water will end up watering the plant, but not directly on the moisture sensor.
+
+Open up __AutoWater.ino__ in the IDE and edit the file to fit the values calibrated during the moisture sensor testing phase. Set the __DEBUG__ value to the appropriate level of logging: __0__ has minimal logging, __1__ has normal logging, and __2__ has logging set to max while disabling the actual watering functionality. This last mode is very useful for debugging and experimenting.
+
+Upload the completed file to the Arduino and open the __Serial Monitor__. Immediately you should see a reading from the moisture sensor. If that reading is too low and __DEBUG < 2__, AutoWater will water your plant! Once you've played around for a bit and have a good idea of how things work, change the time variables to fit the watering needs of your plant. Now you can happily go about your day knowing that the needs of your plant are being taken care of!
