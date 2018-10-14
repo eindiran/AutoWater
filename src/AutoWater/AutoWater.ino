@@ -7,26 +7,25 @@
 
 // Initialize globals.
 int DEBUG = 1;
-int DELAY_SECONDS = 5; // time between moisture checks
-int AIR_VALUE = 1000; // Replace this value with sensor reading of air
-int WATER_VALUE = 200; // Replace this value with sensor reading of water
-int INTERVAL = 200; // Replace this with (AIR_VALUE - WATER_VALUE)/4
+int DELAY_SECONDS = 5;   // time between moisture checks
+int AIR_VALUE = 1000;    // Replace this value with sensor reading of air
+int WATER_VALUE = 200;   // Replace this value with sensor reading of water
+int INTERVAL = 200;      // Replace this with (AIR_VALUE - WATER_VALUE)/4
 int DRYNESS_THRESHOLD = 425;
 int SOLENOID_PIN = 7;
 int WATER_TIME_MS = 450; // time to open SV in ms
 
 /**
- * One-time setup.
+ * One-time setup:
+ * open up the serial port, set he baud rate to 9600 and prep the SV's pin.
  */
 void setup() {
-  Serial.begin(9600); // set the baud rate
-  pinMode(SOLENOID_PIN, OUTPUT); // Prep the SV's pin.
+  Serial.begin(9600);
+  pinMode(SOLENOID_PIN, OUTPUT);
 }
 
 /**
  * Sets a string encoding moisture level.
- * This function was inspired by the test code here:
- * https://www.dfrobot.com/wiki/index.php/Capacitive_Soil_Moisture_Sensor_SKU:SEN0193
  */
 void get_moisture_level(int moisture_val, String &moisture_level) {
   if (moisture_val <= WATER_VALUE) {
@@ -51,12 +50,11 @@ void get_moisture_level(int moisture_val, String &moisture_level) {
 void nc_turn_solenoid(int num_seconds) {
   int num_ms = num_seconds * 1000;
   if (DEBUG) {
-    // Poor-man's printf
     Serial.print("Opening solenoid valve for "); Serial.println(num_seconds);
   }
   digitalWrite(SOLENOID_PIN, HIGH); // Switched magnet on; open
   delay(num_ms);
-  digitalWrite(SOLENOID_PIN, LOW); // Switched magnet off; closed
+  digitalWrite(SOLENOID_PIN, LOW);  // Switched magnet off; closed
   if (DEBUG) {
     Serial.println("Solenoid valve closed.");
   }
@@ -87,17 +85,17 @@ void print_sensor_value(int val) {
  * Main loop.
  */
 void loop() {
-  int moisture_val; // reading from moisture sensor
+  int moisture_val;             // reading from moisture sensor
   moisture_val = analogRead(0); // connect sensor to Analog 0
   print_sensor_value(moisture_val);
   if (DEBUG) {
-    // if DEBUG != 0 print human-readable moisture level
+    // Print human-readable moisture level
     String moisture_level;
     get_moisture_level(moisture_val, moisture_level);
     Serial.println(moisture_level);
   }
   if (DEBUG == 2) {
-    // if DEBUG == 2, check sensor w/o watering
+    // Check sensor without actually activating SV
     delay(DELAY_SECONDS * 1000);
     return;
   }
