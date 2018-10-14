@@ -5,23 +5,21 @@
  */
 
 // Initialize globals.
-int DELAY_SECONDS = 1; // time between each read of the sensor in seconds
-int AIR_VALUE = 1000; // Replace this value with sensor reading of air
+int DELAY_SECONDS = 1; // Time between each read of the sensor in seconds
+int AIR_VALUE = 1000;  // Replace this value with sensor reading of air
 int WATER_VALUE = 200; // Replace this value with sensor reading of water
-int INTERVAL = 200; // Replace this with (AIR_VALUE - WATER_VALUE)/4
-int DEBUG = 0; // Set this to 1 to call get_moisture_level()
+int INTERVAL = 200;    // Replace this with (AIR_VALUE - WATER_VALUE)/4
+int DEBUG = 0;         // Set this to 1 to call get_moisture_level()
 
 /**
- * One time setup; opens serial port.
+ * One time setup; opens serial port and sets baud rate to 9600.
  */
 void setup() {
-  Serial.begin(9600); // set the baud rate to 9600
+  Serial.begin(9600);
 }
 
 /**
  * Sets a string encoding moisture level.
- * This function was inspired by the test code here:
- * https://www.dfrobot.com/wiki/index.php/Capacitive_Soil_Moisture_Sensor_SKU:SEN0193
  */
 void get_moisture_level(int moisture_val, String &moisture_level) {
   if (moisture_val <= WATER_VALUE) {
