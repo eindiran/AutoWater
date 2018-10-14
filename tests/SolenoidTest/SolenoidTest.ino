@@ -11,7 +11,8 @@ int DELAY_SECONDS = 1;
 int SOLENOID_PIN = 7;
 
 /**
- * One-time setup steps; open serial port, prep solenoid's pin.
+ * One-time setup steps:
+ * open serial port, set baud rate to 9600, prep solenoid's pin.
  */
 void setup() {
   Serial.begin(9600);
@@ -26,12 +27,11 @@ void setup() {
 void nc_turn_solenoid(int num_seconds) {
   int num_ms = num_seconds * 1000;
   if (DEBUG) {
-    // Poor-man's printf
     Serial.print("Opening solenoid valve for "); Serial.print(num_seconds); Serial.println(" second(s).");
   }
   digitalWrite(SOLENOID_PIN, HIGH); // Switched magnet on; open
   delay(num_ms);
-  digitalWrite(SOLENOID_PIN, LOW); // Switched magnet off; closed
+  digitalWrite(SOLENOID_PIN, LOW);  // Switched magnet off; closed
   if (DEBUG) {
     Serial.println("Solenoid valve closed.");
   }
