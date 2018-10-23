@@ -26,7 +26,7 @@ Take three jumper wires (1 red, 1 black, 1 blue). Match them to the same colors 
 ### Moisture Sensor diagram
 Here is a diagram showing the connections between the Arduino and the moisture sensor:
 
-![Moisture Sensor Diagram](AutoWater/diagrams/MoistureSensorDiagram.png "Moisture Sensor Diagram")
+![Moisture Sensor Diagram](diagrams/MoistureSensorDiagram.png "Moisture Sensor Diagram")
 
 ### Testing the moisture sensor
 Plug in the Arduino to your computer, then open the __Arduino IDE__ and upload `MoistureSensorTest.ino` to it. If you get permissions issues and can't upload it, look up the error message it spits out. Likely you will need to run a command like `sudo chmod a+rw /dev/ttyACM0`, which will give you write permissions for the Arduino.
@@ -52,7 +52,7 @@ Save the code and re-upload it to the Arduino. Re-run the test in the air, water
 
 ## Turning the Solenoid Valve
 Here is a diagram showing the setup of the solenoid valve.
-![Solenoid Valve setup](AutoWater/diagrams/SolenoidValveDiagram.png "Solenoid Valve setup")
+![Solenoid Valve setup](diagrams/SolenoidValveDiagram.png "Solenoid Valve setup")
 
 The setup in this section is based on a tutorial from BC Robotics, which can be found [here](https://www.bc-robotics.com/tutorials/controlling-a-solenoid-valve-with-arduino/).
 
@@ -79,7 +79,7 @@ Unplug the Arduino. Take a short length of __aquarium tubing__ and cut it off, p
 Plug the Arduino back in and run `SolenoidTest.ino` again. The valve should alternate between opening for a second and closing for a second, letting water out into the bucket each time it is open.
 
 ## Putting it all together
-![AutoWater diagram](AutoWater/diagrams/AutoWaterDiagram.png "AutoWater diagram")
+![AutoWater diagram](diagrams/AutoWaterDiagram.png "AutoWater diagram")
 If you didn't unplug the moisture sensor during the last step, congratulations! You are almost ready to run AutoWater. If you did, follow the instructions for plugging in the moisture sensor while leaving all the wires from setting up the solenoid valve plugged in.
 
 The last step before you run everything is connecting the potted plant. First place the moisture sensor in the soil, then take the output side of the tubing amd place it so that the output water will end up watering the plant, but not directly on the moisture sensor.
