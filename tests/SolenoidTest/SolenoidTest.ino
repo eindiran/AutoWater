@@ -4,14 +4,14 @@
  * Author: eindiran <eindiran@uchicago.edu>
  */
 
-// Initialize globals
-int DEBUG = 1;
-int OPEN_SECONDS = 1;
-int DELAY_SECONDS = 1;
-int SOLENOID_PIN = 7;
+/** Initialize globals */
+const int DEBUG = 1;         // If this is on, the system will be more verbose
+const int OPEN_SECONDS = 1;  // Number of seconds to open the solenoid valve for
+const int DELAY_SECONDS = 1; // The time between runs in loop()
+const int SOLENOID_PIN = 7;  // The pin value on the Arduino used for the sv
 
 /**
- * One-time setup steps:
+ * setup() --> One-time setup steps:
  * open serial port, set baud rate to 9600, prep solenoid's pin.
  */
 void setup() {
@@ -20,7 +20,7 @@ void setup() {
 }
 
 /**
- * Open a NC Solenoid valve:
+ * nc_turn_solenoid() --> Open a NC Solenoid valve:
  * Puts a normally closed solenoid valve into its open
  * state for num_seconds, then closes it.
  */
@@ -38,8 +38,9 @@ void nc_turn_solenoid(int num_seconds) {
 }
 
 /**
- * Main loop: opens the solenoid for OPEN_SECONDS
- * then waits for DELAY_SECONDS, ad infinitum.
+ * loop() --> Opens the solenoid for OPEN_SECONDS
+ * then waits for DELAY_SECONDS, ad infinitum, until the Arduino
+ * is otherwise interfered with.
  */
 void loop() {
   nc_turn_solenoid(OPEN_SECONDS); // turn on for OPEN_SECONDS
